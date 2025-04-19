@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Forecast Exports</h1>
+
+<p>This metro area is expected to have $ {{ "{:,.2f}".format(prediction) }} in export volumes in 2024.</p>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Changed Conditions Impact on Exports</h1>
+
+<p>
+    I trained a regression model based on Metropolitan Statistical Area (MSA) export data. See how changes in conditions might impact a metro area's export volume. </br></br>
+</p>
+
+<form action = "/prefill_lag" method = "post">
+    <label for= "msa"> Select a Metro Area:</label><br>
+    <select id = "msa" name = "msa" width = "120">
+        {% for item in dropdown %}
+          <option value="{{item}}">{{item}}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary">Fill with Metro Area's 2023 Data</button><br>
+</form>
+
+<form action="/lag_predictor" method = "post">
+  <label for="Per_Capita_Income">Per_Capita_Income (USD):</label><br>
+  <input type="number" step="any" class="form-control" id="Per_Capita_Income" name="Per_Capita_Income"><br>
+  <label for="Population"> Population:</label><br>
+  <input type="number" step="any" class="form-control" id="Population" name="Population"><br>
+  <label for="Manufacturing_Employment"> Manufacturing_Employment (in thousands of persons):</label><br>
+  <input type="number" step="any" class="form-control" id="Manufacturing_Employment" name="Manufacturing_Employment"><br>
+  <label for="Top_Corporate_Income_Tax_Rate"> Top Corporate Income Tax Rate (in percent):</label><br>
+  <input type="number" step="any" class="form-control" id="Top_Corporate_Income_Tax_Rate" name="Top_Corporate_Income_Tax_Rate"><br>
+  <label for="FHFA_index"> FHFA House Price Index: </label><br>
+  <input type="number" step="any" class="form-control" id="FHFA_index" name="FHFA_index"><br>
+  <label for="energy_consumption"> Sum of Cooling Degree Days and Heating Degree Days for the Year:</label><br>
+  <input type="number" step="any" class="form-control" id="energy_consumption" name="energy_consumption"><br>
+  <label for="avg_weather"> Average Temperature (in Fahrenheit):</label><br>
+  <input type="number" step="any"class="form-control" id="avg_weather" name="avg_weather"><br>
+  <label for="Minimum_Wage"> Minimum Wage:</label><br>
+  <input type="number" step=".01" class="form-control" id="Minimum_Wage" name="Minimum_Wage"><br>
+  <label for="SP500_Close"> This Year's S&P500 Closing Price: </label><br>
+  <input type="number" step=".01" class="form-control" id="SP500_Close" name="SP500_Close"><br>
+  <label for="lagged_export"> Last Year's Export Volumes (in Millions of USD):</label><br>
+  <input type="number" step="any" class="form-control" id="lagged_export" name="lagged_export"><br>
+  <label for="">&nbsp;</label><br>
+  <button type="submit" class="btn btn-primary">Predict Exports</button><br>
+
+ </form>
+        <!-- Ends form section -->
+
+{% endblock %}
