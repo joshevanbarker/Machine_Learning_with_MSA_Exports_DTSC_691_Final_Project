@@ -10,8 +10,6 @@ app.config.from_mapping(
     DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
 )
 
-
-
 forecasted_msa_data = pd.read_csv(os.path.join(app.root_path, 'templates', 'forecast_msa_table.csv'))
 forecast_msas = list(forecasted_msa_data["MSA"])
 lag_msa_data = pd.read_csv(os.path.join(app.root_path, 'templates', 'lag_msa_table.csv'))
@@ -61,7 +59,7 @@ def lag_predictor():
         SP500_Close = request.form.get('SP500_Close')
         lagged_export = request.form.get('lagged_export')
 
-        # call preprocessDataAndPredict and pass inputs
+        # call policychange_lag and pass inputs
         try:
             prediction = policychange_lag(Per_Capita_Income, Population, Manufacturing_Employment, Top_Corporate_Income_Tax_Rate, FHFA_index, avg_weather, energy_consumption, Minimum_Wage, SP500_Close, lagged_export)
             # pass prediction to template
@@ -134,7 +132,6 @@ def forecasted_predictor():
         SP500_Close = request.form.get('SP500_Close')
         exports = request.form.get('exports')
 
-        # call preprocessDataAndPredict and pass inputs
         try:
             prediction = forecast(Per_Capita_Income, Population, Manufacturing_Employment, Top_Corporate_Income_Tax_Rate, FHFA_index, avg_weather, energy_consumption, Minimum_Wage, SP500_Close, exports)
             # pass prediction to template
